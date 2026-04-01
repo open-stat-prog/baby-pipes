@@ -84,6 +84,19 @@ div.callout-practice.callout-style-default .callout-icon::before, div.callout-pr
   content: '\f085' !important;
   background-image: none;
 }
+div.callout-reading.callout {
+  border-left-color: purple;
+}
+div.callout-reading.callout-style-default > .callout-header {
+  background-color: rgb(from purple r g b / 13%);
+}
+div.callout-reading .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-reading.callout-style-default .callout-icon::before, div.callout-reading.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free', FontAwesome;
+  font-style: normal;
+  content: '\f518' !important;
+  background-image: none;
+}
 div.callout-reading-advanced.callout {
   border-left-color: red;
 }
@@ -108,19 +121,6 @@ div.callout-resource.callout-style-default .callout-icon::before, div.callout-re
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
   content: '\f0c1' !important;
-  background-image: none;
-}
-div.callout-reading.callout {
-  border-left-color: purple;
-}
-div.callout-reading.callout-style-default > .callout-header {
-  background-color: rgb(from purple r g b / 13%);
-}
-div.callout-reading .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-reading.callout-style-default .callout-icon::before, div.callout-reading.callout-titled .callout-icon::before {
-  font-family: 'Font Awesome 6 Free', FontAwesome;
-  font-style: normal;
-  content: '\f518' !important;
   background-image: none;
 }
 </style>
@@ -269,34 +269,34 @@ Note
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p>Which of the following commands will compute the mean of the <code>age</code> variable from the <code>bfi</code> dataset?</p>
-<div id="webex-8b0d654d2e4dea3f68973892654d5135" class="webex-checkboxgroup" data-answer="Y1IcVBoEGFQeVGk=">
-<label><input type="checkbox" autocomplete="off" name="8b0d654d2e4dea3f68973892654d5135"><span><code>bfi %&gt;% mean()$age</code></span></label><label><input type="checkbox" autocomplete="off" name="8b0d654d2e4dea3f68973892654d5135"><span><code>bfi |&gt; mean(age)</code></span></label><label><input type="checkbox" autocomplete="off" name="8b0d654d2e4dea3f68973892654d5135"><span><code>bfi$age |&gt; mean()</code></span></label><label><input type="checkbox" autocomplete="off" name="8b0d654d2e4dea3f68973892654d5135"><span><code>bfi %&gt;% mean(age)</code></span></label><label><input type="checkbox" autocomplete="off" name="8b0d654d2e4dea3f68973892654d5135"><span><code>bfi %&gt;% .$age %&gt;% mean()</code></span></label>
+<div id="webex-2d3622f6a462272ee1ad3409ca8f668c" class="webex-checkboxgroup" data-answer="aVQfBx4CSgZNBGs=">
+<label><input type="checkbox" autocomplete="off" name="2d3622f6a462272ee1ad3409ca8f668c"><span><code>bfi %&gt;% mean(age)</code></span></label><label><input type="checkbox" autocomplete="off" name="2d3622f6a462272ee1ad3409ca8f668c"><span><code>bfi$age %&gt;% mean()</code></span></label><label><input type="checkbox" autocomplete="off" name="2d3622f6a462272ee1ad3409ca8f668c"><span><code>bfi %&gt;% mean()$age</code></span></label><label><input type="checkbox" autocomplete="off" name="2d3622f6a462272ee1ad3409ca8f668c"><span><code>bfi |&gt; mean(age)</code></span></label><label><input type="checkbox" autocomplete="off" name="2d3622f6a462272ee1ad3409ca8f668c"><span><code>bfi %&gt;% mean(age, .)</code></span></label>
 </div>
 </div>
 <div class="webex-solution">
 <ul>
 <li>Incorrect</li>
+<li>Correct: This command uses the <strong>dplyr</strong> pipe operator, <code>%&gt;%</code>, to pass <code>bfi$age</code> to the <code>mean()</code> function.</li>
 <li>Incorrect</li>
-<li>Correct: This command uses the Base R pipe operator, <code>|&gt;</code>, to pass <code>bfi$age</code> to the <code>mean()</code> function.</li>
 <li>Incorrect</li>
-<li>Correct: This command uses the <strong>dplyr</strong> pipe operator, <code>%&gt;%</code>, and the dataset placeholder symbol, <code>.</code>, to extract <code>age</code> from <code>bfi</code>, and pass the result to <code>mean()</code>.</li>
+<li>Incorrect</li>
 </ul>
 </div>
 </div>
 <div class="webex-question">
 <div class="webex-check webex-box">
 <p>Which of the following pipelines includes a valid use of the placeholder symbol (<code>.</code>, or <code>_</code>)?</p>
-<div id="webex-4f31df6f689147842879e9b627a22fdc" class="webex-checkboxgroup" data-answer="b1YfAUhXGlYaCGQ=">
-<label><input type="checkbox" autocomplete="off" name="4f31df6f689147842879e9b627a22fdc"><span><code>bfi %&gt;% lm(extra ~ age, data = _)</code></span></label><label><input type="checkbox" autocomplete="off" name="4f31df6f689147842879e9b627a22fdc"><span><code>bfi |&gt; lm(extra ~ age, _)</code></span></label><label><input type="checkbox" autocomplete="off" name="4f31df6f689147842879e9b627a22fdc"><span><code>bfi |&gt; lm(extra ~ age, data = _)</code></span></label><label><input type="checkbox" autocomplete="off" name="4f31df6f689147842879e9b627a22fdc"><span><code>bfi |&gt; lm(extra ~ age)</code></span></label><label><input type="checkbox" autocomplete="off" name="4f31df6f689147842879e9b627a22fdc"><span><code>bfi |&gt; lm(extra ~ age, data = .)</code></span></label>
+<div id="webex-d0c282e2546c99dae4026ae6001dad1b" class="webex-checkboxgroup" data-answer="PwBPAhQDSQIZBGs=">
+<label><input type="checkbox" autocomplete="off" name="d0c282e2546c99dae4026ae6001dad1b"><span><code>bfi %&gt;% lm(extra ~ age, data = _)</code></span></label><label><input type="checkbox" autocomplete="off" name="d0c282e2546c99dae4026ae6001dad1b"><span><code>bfi |&gt; lm(extra ~ age, data = .)</code></span></label><label><input type="checkbox" autocomplete="off" name="d0c282e2546c99dae4026ae6001dad1b"><span><code>bfi %&gt;% lm(extra ~ age, data = .)</code></span></label><label><input type="checkbox" autocomplete="off" name="d0c282e2546c99dae4026ae6001dad1b"><span><code>bfi |&gt; lm(extra ~ age)</code></span></label><label><input type="checkbox" autocomplete="off" name="d0c282e2546c99dae4026ae6001dad1b"><span><code>bfi |&gt; lm(extra ~ age, _)</code></span></label>
 </div>
 </div>
 <div class="webex-solution">
 <ul>
 <li>Incorrect: Uses the wrong placeholder symbol</li>
-<li>Incorrect: With the Base R pipe, you can only use the placeholder symbol for a named argument.</li>
+<li>Incorrect: Uses the wrong placeholder symbol</li>
 <li>Correct</li>
 <li>Incorrect: No placeholder. This code will fail because the dataset is not the first argument in <code>lm()</code>.</li>
-<li>Incorrect: Uses the wrong placeholder symbol</li>
+<li>Incorrect: With the Base R pipe, you can only use the placeholder symbol for a named argument.</li>
 </ul>
 </div>
 </div>

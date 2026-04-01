@@ -404,7 +404,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"options":{"message":"true","results":"markup","read-only":"false","context":"setup","fig-cap":"","fig-height":5,"editor-max-height":"","comment":"","dpi":72,"out-height":"","editor-word-wrap":"true","classes":"","output":"true","out-width":"700px","warning":"true","fig-width":7,"label":"unnamed-chunk-1","editor-quick-suggestions":"false","editor-font-scale":"1","autorun":"true"},"id":1,"code":"dir.create(\"data\")\ndownload.file(\"https://openstatprog.com/raw-data/bfi.rds\", \"data/bfi.rds\")\n\nbfi <- readRDS(\"data/bfi.rds\")"},{"options":{"message":"true","results":"markup","read-only":"false","context":"interactive","fig-cap":"","fig-height":5,"editor-max-height":"","comment":"","dpi":72,"out-height":"","editor-word-wrap":"true","classes":"","output":"true","out-width":"700px","warning":"true","fig-width":7,"label":"unnamed-chunk-2","editor-quick-suggestions":"false","editor-font-scale":"1","autorun":"false"},"id":2,"code":""},{"options":{"message":"true","results":"markup","read-only":"false","context":"interactive","fig-cap":"","fig-height":5,"editor-max-height":"","comment":"","dpi":72,"out-height":"","editor-word-wrap":"true","classes":"","output":"true","out-width":"700px","warning":"true","fig-width":7,"label":"unnamed-chunk-3","editor-quick-suggestions":"false","editor-font-scale":"1","autorun":"false"},"id":3,"code":""},{"options":{"message":"true","results":"markup","read-only":"false","context":"interactive","fig-cap":"","fig-height":5,"editor-max-height":"","comment":"","dpi":72,"out-height":"","editor-word-wrap":"true","classes":"","output":"true","out-width":"700px","warning":"true","fig-width":7,"label":"unnamed-chunk-4","editor-quick-suggestions":"false","editor-font-scale":"1","autorun":"false"},"id":4,"code":""}];
+globalThis.qwebrCellDetails = [{"id":1,"options":{"dpi":72,"message":"true","out-width":"700px","warning":"true","editor-max-height":"","context":"setup","label":"unnamed-chunk-1","output":"true","fig-cap":"","comment":"","fig-height":5,"fig-width":7,"read-only":"false","autorun":"true","classes":"","editor-quick-suggestions":"false","out-height":"","editor-font-scale":"1","results":"markup","editor-word-wrap":"true"},"code":"dir.create(\"data\")\ndownload.file(\"https://openstatprog.com/raw-data/bfi.rds\", \"data/bfi.rds\")\n\nbfi <- readRDS(\"data/bfi.rds\")"},{"id":2,"options":{"dpi":72,"message":"true","out-width":"700px","warning":"true","editor-max-height":"","context":"interactive","label":"unnamed-chunk-2","output":"true","fig-cap":"","comment":"","fig-height":5,"fig-width":7,"read-only":"false","autorun":"false","classes":"","editor-quick-suggestions":"false","out-height":"","editor-font-scale":"1","results":"markup","editor-word-wrap":"true"},"code":""},{"id":3,"options":{"dpi":72,"message":"true","out-width":"700px","warning":"true","editor-max-height":"","context":"interactive","label":"unnamed-chunk-3","output":"true","fig-cap":"","comment":"","fig-height":5,"fig-width":7,"read-only":"false","autorun":"false","classes":"","editor-quick-suggestions":"false","out-height":"","editor-font-scale":"1","results":"markup","editor-word-wrap":"true"},"code":""},{"id":4,"options":{"dpi":72,"message":"true","out-width":"700px","warning":"true","editor-max-height":"","context":"interactive","label":"unnamed-chunk-4","output":"true","fig-cap":"","comment":"","fig-height":5,"fig-width":7,"read-only":"false","autorun":"false","classes":"","editor-quick-suggestions":"false","out-height":"","editor-font-scale":"1","results":"markup","editor-word-wrap":"true"},"code":""}];
 
 </script>
 <script type="module">
@@ -1658,19 +1658,6 @@ globalThis.qwebrExecuteCode = async function (
 
 </script>
 <style>
-div.callout-reading.callout {
-  border-left-color: purple;
-}
-div.callout-reading.callout-style-default > .callout-header {
-  background-color: rgb(from purple r g b / 13%);
-}
-div.callout-reading .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-reading.callout-style-default .callout-icon::before, div.callout-reading.callout-titled .callout-icon::before {
-  font-family: 'Font Awesome 6 Free', FontAwesome;
-  font-style: normal;
-  content: '\f518' !important;
-  background-image: none;
-}
 div.callout-reading-advanced.callout {
   border-left-color: red;
 }
@@ -1679,6 +1666,32 @@ div.callout-reading-advanced.callout-style-default > .callout-header {
 }
 div.callout-reading-advanced .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
 div.callout-reading-advanced.callout-style-default .callout-icon::before, div.callout-reading-advanced.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free', FontAwesome;
+  font-style: normal;
+  content: '\f518' !important;
+  background-image: none;
+}
+div.callout-practice.callout {
+  border-left-color: green;
+}
+div.callout-practice.callout-style-default > .callout-header {
+  background-color: rgb(from green r g b / 13%);
+}
+div.callout-practice .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-practice.callout-style-default .callout-icon::before, div.callout-practice.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free', FontAwesome;
+  font-style: normal;
+  content: '\f085' !important;
+  background-image: none;
+}
+div.callout-reading.callout {
+  border-left-color: purple;
+}
+div.callout-reading.callout-style-default > .callout-header {
+  background-color: rgb(from purple r g b / 13%);
+}
+div.callout-reading .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-reading.callout-style-default .callout-icon::before, div.callout-reading.callout-titled .callout-icon::before {
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
   content: '\f518' !important;
@@ -1695,19 +1708,6 @@ div.callout-resource.callout-style-default .callout-icon::before, div.callout-re
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
   content: '\f0c1' !important;
-  background-image: none;
-}
-div.callout-practice.callout {
-  border-left-color: green;
-}
-div.callout-practice.callout-style-default > .callout-header {
-  background-color: rgb(from green r g b / 13%);
-}
-div.callout-practice .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-practice.callout-style-default .callout-icon::before, div.callout-practice.callout-titled .callout-icon::before {
-  font-family: 'Font Awesome 6 Free', FontAwesome;
-  font-style: normal;
-  content: '\f085' !important;
   background-image: none;
 }
 </style>

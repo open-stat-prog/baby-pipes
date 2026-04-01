@@ -404,7 +404,7 @@ globalThis.qwebrCustomizedWebROptions = {
 };
 
 // Store cell data
-globalThis.qwebrCellDetails = [{"id":1,"options":{"editor-word-wrap":"true","editor-quick-suggestions":"false","fig-cap":"","out-width":"700px","results":"markup","autorun":"true","message":"true","label":"unnamed-chunk-1","read-only":"false","output":"true","comment":"","editor-font-scale":"1","warning":"true","context":"setup","dpi":72,"fig-height":5,"fig-width":7,"out-height":"","classes":"","editor-max-height":""},"code":"dir.create(\"data\")\ndownload.file(\"https://openstatprog.com/raw-data/bfi.rds\", \"data/bfi.rds\")\n\nbfi <- readRDS(\"data/bfi.rds\")"},{"id":2,"options":{"editor-word-wrap":"true","editor-quick-suggestions":"false","fig-cap":"","out-width":"700px","results":"markup","autorun":"false","message":"true","label":"unnamed-chunk-2","read-only":"false","output":"true","comment":"","editor-font-scale":"1","warning":"true","context":"interactive","dpi":72,"fig-height":5,"fig-width":7,"out-height":"","classes":"","editor-max-height":""},"code":""},{"id":3,"options":{"editor-word-wrap":"true","editor-quick-suggestions":"false","fig-cap":"","out-width":"700px","results":"markup","autorun":"false","message":"true","label":"unnamed-chunk-3","read-only":"false","output":"true","comment":"","editor-font-scale":"1","warning":"true","context":"interactive","dpi":72,"fig-height":5,"fig-width":7,"out-height":"","classes":"","editor-max-height":""},"code":""},{"id":4,"options":{"editor-word-wrap":"true","editor-quick-suggestions":"false","fig-cap":"","out-width":"700px","results":"markup","autorun":"false","message":"true","label":"unnamed-chunk-4","read-only":"false","output":"true","comment":"","editor-font-scale":"1","warning":"true","context":"interactive","dpi":72,"fig-height":5,"fig-width":7,"out-height":"","classes":"","editor-max-height":""},"code":""}];
+globalThis.qwebrCellDetails = [{"id":1,"code":"dir.create(\"data\")\ndownload.file(\"https://openstatprog.com/raw-data/bfi.rds\", \"data/bfi.rds\")\n\nbfi <- readRDS(\"data/bfi.rds\")","options":{"message":"true","fig-width":7,"autorun":"true","editor-max-height":"","label":"unnamed-chunk-1","fig-height":5,"dpi":72,"results":"markup","editor-word-wrap":"true","editor-quick-suggestions":"false","warning":"true","comment":"","output":"true","editor-font-scale":"1","read-only":"false","classes":"","fig-cap":"","out-width":"700px","out-height":"","context":"setup"}},{"id":2,"code":"","options":{"message":"true","fig-width":7,"autorun":"false","editor-max-height":"","label":"unnamed-chunk-2","fig-height":5,"dpi":72,"results":"markup","editor-word-wrap":"true","editor-quick-suggestions":"false","warning":"true","comment":"","output":"true","editor-font-scale":"1","read-only":"false","classes":"","fig-cap":"","out-width":"700px","out-height":"","context":"interactive"}},{"id":3,"code":"","options":{"message":"true","fig-width":7,"autorun":"false","editor-max-height":"","label":"unnamed-chunk-3","fig-height":5,"dpi":72,"results":"markup","editor-word-wrap":"true","editor-quick-suggestions":"false","warning":"true","comment":"","output":"true","editor-font-scale":"1","read-only":"false","classes":"","fig-cap":"","out-width":"700px","out-height":"","context":"interactive"}},{"id":4,"code":"","options":{"message":"true","fig-width":7,"autorun":"false","editor-max-height":"","label":"unnamed-chunk-4","fig-height":5,"dpi":72,"results":"markup","editor-word-wrap":"true","editor-quick-suggestions":"false","warning":"true","comment":"","output":"true","editor-font-scale":"1","read-only":"false","classes":"","fig-cap":"","out-width":"700px","out-height":"","context":"interactive"}}];
 
 </script>
 <script type="module">
@@ -1658,6 +1658,19 @@ globalThis.qwebrExecuteCode = async function (
 
 </script>
 <style>
+div.callout-reading-advanced.callout {
+  border-left-color: red;
+}
+div.callout-reading-advanced.callout-style-default > .callout-header {
+  background-color: rgb(from red r g b / 13%);
+}
+div.callout-reading-advanced .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-reading-advanced.callout-style-default .callout-icon::before, div.callout-reading-advanced.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free', FontAwesome;
+  font-style: normal;
+  content: '\f518' !important;
+  background-image: none;
+}
 div.callout-practice.callout {
   border-left-color: green;
 }
@@ -1692,19 +1705,6 @@ div.callout-reading.callout-style-default > .callout-header {
 }
 div.callout-reading .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
 div.callout-reading.callout-style-default .callout-icon::before, div.callout-reading.callout-titled .callout-icon::before {
-  font-family: 'Font Awesome 6 Free', FontAwesome;
-  font-style: normal;
-  content: '\f518' !important;
-  background-image: none;
-}
-div.callout-reading-advanced.callout {
-  border-left-color: red;
-}
-div.callout-reading-advanced.callout-style-default > .callout-header {
-  background-color: rgb(from red r g b / 13%);
-}
-div.callout-reading-advanced .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-reading-advanced.callout-style-default .callout-icon::before, div.callout-reading-advanced.callout-titled .callout-icon::before {
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
   content: '\f518' !important;
