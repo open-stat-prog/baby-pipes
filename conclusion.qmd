@@ -11,16 +11,22 @@ format:
 source(here::here("R", "buttons.R"))
 ```
 
-Use this page to provide some kind of brief wrap-up.
+Now that you've completed this module, you should have a good handle on the fundamentals of pipes in R. Specifically,
+you should have a good sense of the following concepts.
+
+- What problems pipes solve and which situations benefit from a pipeline-based approach.
+- How you can use pipes to compose multiple functions into a single pipeline.
+- How and when to use four different flavors of pipe operator.
 
 ## Next Steps
 
-If your module feeds naturally into another, link that module through the button below as a suggestion for further study.
-
-- Here, we're linking to the *First Steps* module.
+Pipes are very useful tools in many situations, but they truly shine when using in data processing workflows, especially
+when combined with **dplyr** data manipulation functions. As such, we recommend the *Data Manipulation* module as a
+natural next step that directly extends the tools you learned in this module.
 
 ```{r}
 #| echo: false
 #| results: asis
-next_module_button("https://www.openstatprog.com/first-steps/")
+# next_module_button("https://www.openstatprog.com/data-manipulation/")
+next_module_button("/in_progress.qmd")
 ```

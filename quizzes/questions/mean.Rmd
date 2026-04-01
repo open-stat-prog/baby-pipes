@@ -1,0 +1,41 @@
+Question
+========
+
+Which of the following commands will compute the mean of the `age` variable from the `bfi` dataset?
+
+Answerlist
+----------
+
+* `bfi$age %>% mean()`
+* `bfi$age |> mean()`
+* `bfi %$% mean(age)`
+* `bfi %>% .$age %>% mean()`
+* `bfi %>% mean(age)`
+* `bfi |> mean(age)`
+* `bfi %>% mean()$age`
+* `bfi %>% mean(age, .)`
+* `mean() %>% bfi$age`
+
+Solution
+========
+
+Answerlist
+----------
+
+* Correct: This command uses the **dplyr** pipe operator, `%>%`, to pass `bfi$age` to the `mean()` function.
+* Correct: This command uses the Base R pipe operator, `|>`, to pass `bfi$age` to the `mean()` function.
+* Correct: This command uses the exposition pipe operator, `%$%`, to expose the columns of `bfi` to the `mean()` function.
+* Correct: This command uses the **dplyr** pipe operator, `%>%`, and the dataset placeholder symbol, `.`, to extract `age` from `bfi`, and pass the result to `mean()`.
+* Incorrect
+* Incorrect
+* Incorrect
+* Incorrect
+* Incorrect
+
+Meta-information
+================
+
+exname: mean
+extype: mchoice
+exsolution: 111100000
+exshuffle: 5

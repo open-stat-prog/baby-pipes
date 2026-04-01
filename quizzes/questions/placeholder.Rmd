@@ -1,0 +1,37 @@
+Question
+========
+
+Which of the following pipelines includes a valid use of the placeholder symbol (`.`, or `_`)?
+
+Answerlist
+----------
+
+* `bfi |> lm(extra ~ age, data = _)`
+* `bfi %>% lm(extra ~ age, data = .)`
+* `bfi %>% lm(.$extra ~ .$age)`
+* `bfi |> lm(extra ~ age, data = .)`
+* `bfi %>% lm(extra ~ age, data = _)`
+* `bfi |> lm(extra ~ age, _)`
+* `bfi |> lm(extra ~ age)`
+
+Solution
+========
+
+Answerlist
+----------
+
+* Correct
+* Correct
+* Correct: This would be a prety dumb way to regress `extra` onto `age`, but it's valid code.
+* Incorrect: Uses the wrong placeholder symbol
+* Incorrect: Uses the wrong placeholder symbol
+* Incorrect: With the Base R pipe, you can only use the placeholder symbol for a named argument.
+* Incorrect: No placeholder. This code will fail because the dataset is not the first argument in `lm()`.
+
+Meta-information
+================
+
+exname: Placeholder
+extype: mchoice
+exsolution: 1110000
+exshuffle: 5

@@ -1,5 +1,5 @@
 ---
-title: "Module Template"
+title: "Pipes"
 page-navigation: false
 format:
   html: 
@@ -10,33 +10,25 @@ format:
 source(here::here("R", "buttons.R"))
 ```
 
-Welcome to our template module. Every module comprises a series of topical *tutorials*, such as the three linked below.
-
-1. [First Topic](/tutorials/first_tutorial/index.qmd)
-1. [Second Topic](/tutorials/second_tutorial/index.qmd)
-
-Each tutorial will comprise a series of interactive lessons with practice problems embedded throughout. Each tutorial
-section should be wrapped up with a knowledge quiz.
+In this module, you will learn how to compose functions using the pipe operator, `|>`.
 
 ## Learning Goals
 
 After completing this module, you will be able to:
 
-### Tutorial 1
+1. Explain the benefits of pipelines versus other methods of composing functions.
+1. Recognize situations in your analyses where a pipeline would be appropriate.
+1. Build pipelines to compose a series of R functions into a single command.
+1. Use four different types of pipe operator in your pipelines, as appropriate:
+   1. The Base R pipe: `|>`
+   1. The **dplyr** pipe: `%>%`
+   1. The exposition pipe: `%$%`
+   1. The assignment pipe: `%<>%`
 
-1. A thing you should learn from Tutorial 1.
-1. Another thing you should learn from Tutorial 1.
-1. One more thing you should learn From Tutorial 1.
-
-### Tutorial 2
-
-1. A thing you should learn from Tutorial 2.
-1. Another thing you should learn from Tutorial 2.
-
-Click the button below to get started with the first tutorial.
+Click the button below to get started with the tutorial.
 
 ```{r}
 #| echo: false
 #| results: asis
-begin_button("/tutorials/first_tutorial/index.html")
+begin_button("/tutorials/motivation.html")
 ```

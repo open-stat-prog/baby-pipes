@@ -1,0 +1,151 @@
+---
+title: "Motivation"
+---
+
+```{r, include = FALSE}
+bfi <- readRDS(here::here("data", "bfi.rds"))
+```
+
+When you perform several transformations in R, your code can quickly become cluttered with nested parentheses or a
+series of temporary variables. Pipes offer a cleaner, more intuitive alternative: they let you write code that mirrors
+the logical flow of your analysis. Each step passes its output directly into the next, creating a readable sequence of
+operations that tells the story of your data transformation from start to finish.
+
+For example, consider using this sequence of operations to compute a vector of standard deviations with the `bfi` dataset:
+
+1. Select five personality scale scores.
+1. Compute their covariance matrix.
+1. Extract the variances from this matrix.
+1. Take the square roots to obtain standard deviations.
+
+We could implement these calculations as the following nested function calls.
+
+```{r}
+sd <- sqrt(
+  diag(
+    cov(
+      bfi[c("agree", "consc", "extra", "neuro", "open")],
+      use = "pairwise"
+    )
+  )
+)
+sd
+```
+
+This approach does the job, but it's certainly not ideal (unless you happen to be a big fan of
+[lisp](https://xkcd.com/297)). The main issue is readability: the code is difficult to parse because you need to read
+the nested function calls from the inside out to understand the sequence of operations. The situation gets even worse if
+we're not as careful about formatting our code.
+
+```{r}
+sd <- sqrt(diag(cov(bfi[c("agree", "consc", "extra", "neuro", "open")],
+  use = "pairwise")))
+sd
+```
+
+To make things clearer, we could break the analysis into several steps and save the intermediate results as a temporary
+object that we repeatedly overwrite.
+
+```{r}
+tmp <- bfi[c("agree", "consc", "extra", "neuro", "open")]
+tmp <- cov(tmp, use = "pairwise")
+tmp <- diag(tmp)
+sd <- sqrt(tmp)
+sd
+```
+
+This approach is clearer than using deeply nested functions, but we still have notable problems. The repeated
+assignments increase the opportunities for typos and bugs. For example, consider a situation where we ran the following
+code earlier in our analysis.
+
+```{r}
+tmp <- bfi[ , 1:5]
+```
+
+Then we tried to execute our focal calculation using the temporary object approach, but we made a small typo.
+
+```{r}
+Tmp <- bfi[c("agree", "consc", "extra", "neuro", "open")]
+tmp <- cov(tmp, use = "pairwise")
+tmp <- diag(tmp)
+sd2 <- sqrt(tmp)
+sd2
+```
+
+Now, our vector contains the standard deviations of the five raw agreeableness items, not the intended scale scores.
+However, our results is still a length-five numeric vector, so we could easily miss our mistake and use the wrong vector
+in subsequent operations. For example, if we were intending to use these standard deviations to standardize the
+personality scores, R would be happy to use either version.
+
+```{r}
+# Standardize using the correct SDs:
+zDat1 <- scale(bfi[c("agree", "consc", "extra", "neuro", "open")], scale = sd)
+
+# Standardize using the wrong SDs:
+zDat2 <- scale(bfi[c("agree", "consc", "extra", "neuro", "open")], scale = sd2)
+
+# Obviously, we get very different results:
+head(zDat1 - zDat2, 10)
+```
+
+This type of error can be difficult to catch in real-world projects, and R won't do anything to warn you. So, we want to
+minimize our opportunities for such mistakes, and pipes are a great way to do just that. Using a pipe, we can express
+the same sequence of calculations in a single expression with a clear, logical structure.
+
+```{r}
+library(dplyr)
+
+sd <- bfi |>
+  select(agree, consc, extra, neuro, open) |>
+  cov(use = "pairwise") |>
+  diag() |>
+  sqrt()
+```
+
+When we compose multiple function call using pipes, we call the resulting command a *pipeline*. Such pipelines solve
+both the issues noted above.
+
+1. It's easy to understand the sequence of calculations, because we can read off the analytic steps from left-to-right,
+   top-to-bottom (just as you'd read text written in a European language, for example).
+1. We do not need to make any temporary assignments, so we minimize our chances of typo-induced bugs.
+
+In practice, pipes are most useful for implementing sequences of complex data processing steps. For example, suppose we
+want to apply the following data processing steps to the `bfi` data.
+
+1. Center the variable `age` on 18.
+1. Create mean scores for `extraversion` and `neuroticism`.
+1. Keep only participants aged 18 or older.
+1. Select only the scale scores and demographic variables.
+1. Sort the data by `extraversion` in ascending order.
+
+Using pipes and `dplyr` functions, we can write:
+
+```{r}
+tmp1 <- bfi %>%
+  mutate(age = age - 18,
+         extra = rowMeans(across(matches("^e\\d$")), na.rm = TRUE),
+         neuro = rowMeans(across(matches("^n\\d$")), na.rm = TRUE)) |>
+  filter(age >= 0) |>
+  select(extra, neuro, age, gender, education) |>
+  arrange(extra)
+
+head(tmp1, 20)
+```
+
+When we implement these computations as a pipeline, each step is explicit, readable, and self-contained: it’s as clear
+as possible what happens and in what order. The same data processing written without pipes would be much harder to
+follow:
+
+```{r}
+tmp2 <- bfi
+tmp2$age   <- tmp2$age - 18
+tmp2$extra <- rowMeans(tmp2[grep("^e\\d$", colnames(tmp2))], na.rm = TRUE)
+tmp2$neuro <- rowMeans(tmp2[grep("^n\\d$", colnames(tmp2))], na.rm = TRUE)
+tmp2 <- tmp2[tmp2$age >= 0, c("extra", "neuro", "age", "gender", "education")]
+tmp2 <- tmp2[order(tmp2$extra), ]
+
+head(tmp2, 20)
+all.equal(tmp1, tmp2, check.attributes = FALSE)
+```
+
+Both approaches produce the same result, but the pipeline is far clearer.

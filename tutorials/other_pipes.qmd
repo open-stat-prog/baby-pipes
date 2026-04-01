@@ -1,0 +1,240 @@
+---
+title: "Different Pipe Operators"
+webr:
+  packages: ['dplyr', 'magrittr']
+---
+
+```{webr-r}
+#| autorun: true
+#| context: setup
+
+dir.create("data")
+download.file("https://openstatprog.com/raw-data/bfi.rds", "data/bfi.rds")
+
+bfi <- readRDS("data/bfi.rds")
+```
+
+```{r, include = FALSE}
+bfi <- readRDS(here::here("data", "bfi.rds"))
+```
+
+## The **dplyr** Pipe: `%>%`
+
+R's native pipe operator, `|>`, was only introduced in R 4.1. Before that, we used the analogous operator provided by
+the **dplyr** package, `%>%`. The **dplyr** pipe is almost exactly the same as the base R version. For example, we can
+re-create our first motivating example as follows.
+
+```{r}
+library(dplyr)
+
+bfi[c("agree", "consc", "extra", "neuro", "open")] %>%
+  cov(use = "pairwise") %>%
+  diag() %>%
+  sqrt()
+```
+
+For most practical purposes, the Base R and **dplyr** pipes are interchangeable, but there are a few minor differences
+between `|>` and `%>%`. For example, the **dplyr** pipe uses the `.` character as the dataset placeholder symbol.
+
+```{r}
+mtcars %>%
+  lm(mpg ~ hp + disp, data = .) %>%
+  summary()
+```
+
+The **dplyr** pipe also allows more flexible usage of the dataset placeholder symbol.
+
+```{r}
+mtcars %>%
+  lm(mpg ~ hp + disp, data = ., weights = .$wt) %>%
+  summary()
+```
+
+```{r, error = TRUE}
+mtcars |>
+  lm(mpg ~ hp + disp, data = _, weights = _$wt) |>
+  summary()
+```
+
+## The Exposition Pipe: `%$%`
+
+The exposition pipe, `%$%`, is a very useful flavor or pipe operator provided by the **magrittr** package. The
+exposition pipe offers an elegant alternative to the dataset placeholder symbol in many common types of pipeline. Most
+notably, pipelines involving functions that employ the so-called *formula interface*, such as `lm()`, `t.test()`, or
+`boxplot()`.
+
+Instead of passing the processed dataset into the first argument of a downstream function, the exposition pipe *exposes*
+the column names of the processed data frame to the downstream function. For example, the following code uses the
+exposition pipe to regress `age` on `extra` in the `bfi` data.
+
+```{r}
+library(magrittr)
+
+bfi %$% lm(extra ~ age + open)
+```
+
+The exposition pipe allows the `lm()` call to access the column names of `bfi` when resolving the model formula `extra ~
+age`. We can achieve analogous results in several ways.
+
+```{r}
+# Explicitly regress vectors:
+lm(bfi$extra ~ bfi$age + bfi$open)
+
+# Use the Base R equivalent of %$%:
+with(bfi, lm(extra ~ age + open))
+
+# Use a dataset placeholder symbol:
+bfi |> lm(extra ~ age + open, data = _)
+```
+
+::: practice
+
+Use the `bfi` dataset and an exposition pipe to create a pipeline to draw a conditional boxplot that visualizes the
+distribution of `agree` scores within `gender` groups.
+
+- Use the Base R `boxplot()` function to draw the plot.
+
+:::: {.panel-tabset}
+
+## {{< var tab_title.editor >}}
+
+```{webr-r}
+```
+
+## {{< var tab_title.solution >}}
+
+```{r}
+library(magrittr)
+
+bfi %$% boxplot(agree ~ gender)
+```
+
+::::
+
+:::
+
+::: practice
+
+Create a pipeline that includes at least on exposition pipe to perform the following operations with the `bfi` dataset:
+
+1. Randomly sample $N = 500$ rows.
+   - Use `dplyr::slice_sample()`.
+1. Use the sampled rows to regress `agree` onto `extra`, `open`, and `gender`.
+   - Use `lm()`.
+1. Extract the residuals from the linear regression model.
+1. Compute the sum of the absolute values of the residuals.
+
+:::: {.panel-tabset}
+
+## {{< var tab_title.editor >}}
+
+```{webr-r}
+```
+
+## {{< var tab_title.solution >}}
+
+```{r}
+library(dplyr)
+set.seed(235711)
+
+bfi |> 
+  slice_sample(n = 500) %$%
+  lm(agree ~ extra + open + gender) |>
+  resid() |>
+  abs() |>
+  sum()
+```
+
+::::
+
+:::
+
+## The Assignment Pipe: `%<>%`
+
+The final type of pipe that we'll cover is certainly a niche tool, but it provides a nice little bit of syntactic sugar.
+We only care about assignment pipes in particular types of pipelines. Names, pipelines with two characteristics:
+
+1. The pipeline modifies a dataset
+1. The pipeline overwrites the original dataset with the modified version
+
+For example, the following pipeline uses **dplyr** data manipulation functions to modify the `bfi1` dataset and
+overwrite the original with the modified version produced by the pipeline.
+
+```{r}
+bfi1 <- bfi
+head(bfi1)
+
+bfi1 <- bfi1 %>%
+  slice_sample(n = 20) %>%
+  select(-matches("\\d$"))
+
+head(bfi1)
+```
+
+The assignment pipe cleans up the syntax a little but and makes the destructive nature of the pipeline clear. When you
+see an assignment pipe, you know that the modified data produced by the pipeline will replace the original dataset.
+
+```{r}
+bfi1 <- bfi
+head(bfi1)
+
+bfi1 %<>%
+  slice_sample(n = 20) %>%
+  select(-matches("\\d$"))
+
+head(bfi1)
+```
+
+Note that we must use the **dplyr** pipe, `%>%`, if we include an assignment pipe in our pipeline. The Base R pipe
+doesn't play nicely with the assignment pipe. More specifically, the assignment pipe behaves like a basic pipe (i.e.,
+`|>` or `%>%`) when combined with the Base R pipe operator, as you can see below.
+
+```{r}
+bfi1 <- bfi
+head(bfi1)
+
+bfi1 %<>%
+  slice_sample(n = 20) |>
+  select(-matches("\\d$"))
+
+head(bfi1)
+```
+
+::: practice
+
+Use the assignment pipe to create a pipeline that implements the following operations:
+
+1. Standardize every column in the `mtcars` dataset.
+1. Overwrites the original `mtcars` dataset with the standardized version.
+
+:::: {.panel-tabset}
+
+## {{< var tab_title.editor >}}
+
+```{webr-r}
+```
+
+## {{< var tab_title.hint >}}
+
+You can use the `scale()` function to standardize variables.
+
+## {{< var tab_title.solution >}}
+
+```{r}
+library(magrittr)
+
+mtcars %<>% scale()
+```
+
+We can sanity check the results by computing the means and variances of each variable.
+
+```{r}
+colMeans(mtcars)
+apply(mtcars, 2, var)
+```
+
+Looks good!
+
+::::
+
+:::

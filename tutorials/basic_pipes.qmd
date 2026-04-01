@@ -1,0 +1,181 @@
+---
+title: "Usage"
+webr:
+  packages: 'dplyr'
+---
+
+```{webr-r}
+#| autorun: true
+#| context: setup
+
+dir.create("data")
+download.file("https://openstatprog.com/raw-data/bfi.rds", "data/bfi.rds")
+
+bfi <- readRDS("data/bfi.rds")
+```
+
+```{r, include = FALSE}
+bfi <- readRDS(here::here("data", "bfi.rds"))
+```
+
+## How Pipes Work
+
+The pipe operator simply passes the output from the upstream function into the first argument of the downstream
+function. Hence, these two expressions are equivalent:
+
+```{r}
+mean(bfi$age)
+bfi$age |> mean()
+```
+
+::: practice
+
+Create a pipeline to complete the following operations on the `mtcars` dataset.
+
+1. Standardize each variable in the `mtcars` dataset.
+1. Compute the mean of each variable in the standardized `mtcars` data.
+
+Your solution should be a single pipeline that produces a length-one logical vector.
+
+:::: {.panel-tabset}
+
+## {{< var tab_title.editor >}}
+
+```{webr-r}
+```
+
+## {{< var tab_title.hint >}}
+
+You can use the following Base R functions in your solution:
+
+- `scale()`: Standardize variables
+- `colMeans()`: Compute the mean of each column in a matrix or data frame.
+
+## {{< var tab_title.solution >}}
+
+```{r}
+mtcars |> scale() |> colMeans()
+```
+
+::::
+
+:::
+
+The data piped into a function only fill the first argument. We're free to specify any additional inputs in the normal
+way. Hence, the following to expressions are also equivalent.
+
+```{r}
+var(bfi$a1, na.rm = TRUE)
+bfi$a1 |> var(na.rm = TRUE)
+```
+
+::: practice
+
+Create a pipeline to complete the following operations in one expression.
+
+1. Create a random sample of 1000 normally distributed values with:
+   - Mean of 10
+   - SD of 5
+1. Compute the range of your sample.
+    - I.e., the difference between the largest and smallest value.
+1. Check if the range of your sample is at least 1.5 times the population variance.
+
+Your solution should be a single pipeline that produces a length-one logical vector.
+
+:::: {.panel-tabset}
+
+## {{< var tab_title.editor >}}
+
+```{webr-r}
+```
+
+## {{< var tab_title.hint >}}
+
+You probably want to use the following functions somewhere in your pipeline.
+
+- `rnorm()`
+- `range()`
+- `diff()`
+
+## {{< var tab_title.solution >}}
+
+```{r}
+m <- 10
+s <- 5
+
+rnorm(1000, mean = m, sd = s) |>
+  range() |>
+  diff() > (1.5 * s^2)
+```
+
+::::
+
+:::
+
+### What if the dataset isn’t the first argument?
+
+Many R functions, particularly those that use a so-called *formula interface*, don’t take the input data as their first
+argument. If you try to include such a function in a normal pipeline, it won’t work. For example, in the following code,
+we try to use the `bfi` dataset to estimate a linear regression model wherein `age` and `open` predict `extra`.
+
+```{r, error = TRUE}
+bfi |> lm(extra ~ age + open)
+```
+
+In these cases, you can use the special placeholder token `_` to tell R explicitly where to insert the piped object.
+
+```{r}
+bfi |> lm(extra ~ age + open, data = _)
+```
+
+Note that we must name the argument to which we assign `_`. The following won't work.
+
+```{r, error = TRUE}
+bfi |> lm(extra ~ age + open, _)
+```
+
+This trick makes it possible to use nearly any function in a pipeline, even when the dataset isn't the first argument.
+
+
+::: practice
+
+Create a pipeline to perform the following operations with the `bfi` dataset:
+
+1. Randomly sample $N = 500$ rows.
+   - Use `dplyr::slice_sample()`.
+1. Use the sampled rows to regress `agree` onto `extra`, `open`, and `gender`.
+   - Use `lm()`.
+1. Extract the residuals from the linear regression model.
+1. Compute the sum of the absolute values of the residuals.
+
+:::: {.panel-tabset}
+
+## {{< var tab_title.editor >}}
+
+```{webr-r}
+```
+
+## {{< var tab_title.solution >}}
+
+```{r}
+library(dplyr)
+set.seed(235711)
+
+bfi |> 
+  slice_sample(n = 500) |>
+  lm(agree ~ extra + open + gender, data = _) |>
+  resid() |>
+  abs() |>
+  sum()
+```
+
+*NOTES:*
+
+- If you don't set the same (or any) seed, your code will produce a different value than the solution shown here
+because your code will sample a different set of rows.
+- If you set the same seed by running `set.seed(235711)` before your pipeline, you should get exactly the same result
+because `slice_sample()` will use the same sequence of pseudo random numbers to pick the rows it "randomly" samples.
+
+::::
+
+:::
