@@ -69,17 +69,17 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>
-div.callout-practice.callout {
-  border-left-color: green;
+div.callout-reading-advanced.callout {
+  border-left-color: red;
 }
-div.callout-practice.callout-style-default > .callout-header {
-  background-color: rgb(from green r g b / 13%);
+div.callout-reading-advanced.callout-style-default > .callout-header {
+  background-color: rgb(from red r g b / 13%);
 }
-div.callout-practice .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-practice.callout-style-default .callout-icon::before, div.callout-practice.callout-titled .callout-icon::before {
+div.callout-reading-advanced .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-reading-advanced.callout-style-default .callout-icon::before, div.callout-reading-advanced.callout-titled .callout-icon::before {
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
-  content: '\f085' !important;
+  content: '\f518' !important;
   background-image: none;
 }
 div.callout-reading.callout {
@@ -90,19 +90,6 @@ div.callout-reading.callout-style-default > .callout-header {
 }
 div.callout-reading .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
 div.callout-reading.callout-style-default .callout-icon::before, div.callout-reading.callout-titled .callout-icon::before {
-  font-family: 'Font Awesome 6 Free', FontAwesome;
-  font-style: normal;
-  content: '\f518' !important;
-  background-image: none;
-}
-div.callout-reading-advanced.callout {
-  border-left-color: red;
-}
-div.callout-reading-advanced.callout-style-default > .callout-header {
-  background-color: rgb(from red r g b / 13%);
-}
-div.callout-reading-advanced .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-reading-advanced.callout-style-default .callout-icon::before, div.callout-reading-advanced.callout-titled .callout-icon::before {
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
   content: '\f518' !important;
@@ -119,6 +106,19 @@ div.callout-resource.callout-style-default .callout-icon::before, div.callout-re
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
   content: '\f0c1' !important;
+  background-image: none;
+}
+div.callout-practice.callout {
+  border-left-color: green;
+}
+div.callout-practice.callout-style-default > .callout-header {
+  background-color: rgb(from green r g b / 13%);
+}
+div.callout-practice .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-practice.callout-style-default .callout-icon::before, div.callout-practice.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free', FontAwesome;
+  font-style: normal;
+  content: '\f085' !important;
   background-image: none;
 }
 </style>
@@ -245,19 +245,17 @@ div.callout-resource.callout-style-default .callout-icon::before, div.callout-re
 
 <section id="question" class="level1">
 <h1>Question</h1>
-<p>Which use of the placeholder <code>.</code> is valid when the data are not the first argument?</p>
+<p>Which of the following pipelines includes a valid use of the placeholder symbol (<code>.</code>, or <code>_</code>)?</p>
 <section id="answerlist" class="level2">
 <h2 class="anchored" data-anchor-id="answerlist">Answerlist</h2>
 <ul>
-<li><p><code>bfi %&gt;% lm(extra ~ age, .)</code></p></li>
-<li><p><code>bfi %&gt;% lm(extra ~ age, data = .)</code></p></li>
-<li><p><code>bfi %&gt;% lm(extra ~ age)</code></p></li>
-<li><p><code>bfi %&gt;% .(extra ~ age)</code></p></li>
-<li><p><code>lm(data = bfi, extra ~ age) %&gt;% .</code></p></li>
-<li><p><code>lm(extra ~ age, data = .) %&gt;% bfi</code></p></li>
-<li><p><code>bfi %&gt;% lm(., extra ~ age)</code></p></li>
-<li><p><code>bfi |&gt; lm(extra ~ age, data = .)</code></p></li>
-<li><p><code>bfi |&gt; data = . |&gt; lm(extra ~ age)</code></p></li>
+<li><code>bfi |&gt; lm(extra ~ age, data = _)</code></li>
+<li><code>bfi %&gt;% lm(extra ~ age, data = .)</code></li>
+<li><code>bfi %&gt;% lm(.$extra ~ .$age)</code></li>
+<li><code>bfi |&gt; lm(extra ~ age, data = .)</code></li>
+<li><code>bfi %&gt;% lm(extra ~ age, data = _)</code></li>
+<li><code>bfi |&gt; lm(extra ~ age, _)</code></li>
+<li><code>bfi |&gt; lm(extra ~ age)</code></li>
 </ul>
 </section>
 </section>
@@ -266,21 +264,19 @@ div.callout-resource.callout-style-default .callout-icon::before, div.callout-re
 <section id="answerlist-1" class="level2">
 <h2 class="anchored" data-anchor-id="answerlist-1">Answerlist</h2>
 <ul>
-<li>TRUE: This use of the placeholder is the correct syntax for passing the data argument in a pipe.</li>
-<li>TRUE: This use of the placeholder is the correct for passing the data argument in a pipe.</li>
-<li>FALSE: The placeholder is not used; the data argument is missing.</li>
-<li>FALSE: The placeholder is incorrectly used as a function.</li>
-<li>FALSE: The placeholder is incorrectly used after the function call.</li>
-<li>FALSE: The placeholder is incorrectly used after the pipe operator.</li>
-<li>FALSE: The placeholder is incorrectly used as the first argument.</li>
-<li>FALSE: This use of the placeholder is the correct syntax for passing the data argument in a pipe, but it will not work with the base R pipe operator.</li>
-<li>FALSE: The syntax is incorrect; the placeholder cannot be used in this way.</li>
+<li>Correct</li>
+<li>Correct</li>
+<li>Correct: This would be a prety dumb way to regress <code>extra</code> onto <code>age</code>, but it’s valid code.</li>
+<li>Incorrect: Uses the wrong placeholder symbol</li>
+<li>Incorrect: Uses the wrong placeholder symbol</li>
+<li>Incorrect: With the Base R pipe, you can only use the placeholder symbol for a named argument.</li>
+<li>Incorrect: No placeholder. This code will fail because the dataset is not the first argument in <code>lm()</code>.</li>
 </ul>
 </section>
 </section>
 <section id="meta-information" class="level1">
 <h1>Meta-information</h1>
-<p>exname: Placeholder extype: schoice exsolution: 110000000 exshuffle: 5</p>
+<p>exname: Placeholder extype: mchoice exsolution: 1110000 exshuffle: 5</p>
 
 
 </section>
@@ -378,7 +374,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/www\.openstatprog\.com\/module-template\/");
+      var filterRegex = new RegExp("https:\/\/www\.openstatprog\.com\/baby-pipes\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

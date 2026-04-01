@@ -82,6 +82,19 @@ div.callout-practice.callout-style-default .callout-icon::before, div.callout-pr
   content: '\f085' !important;
   background-image: none;
 }
+div.callout-reading.callout {
+  border-left-color: purple;
+}
+div.callout-reading.callout-style-default > .callout-header {
+  background-color: rgb(from purple r g b / 13%);
+}
+div.callout-reading .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-reading.callout-style-default .callout-icon::before, div.callout-reading.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free', FontAwesome;
+  font-style: normal;
+  content: '\f518' !important;
+  background-image: none;
+}
 div.callout-resource.callout {
   border-left-color: orange;
 }
@@ -103,19 +116,6 @@ div.callout-reading-advanced.callout-style-default > .callout-header {
 }
 div.callout-reading-advanced .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
 div.callout-reading-advanced.callout-style-default .callout-icon::before, div.callout-reading-advanced.callout-titled .callout-icon::before {
-  font-family: 'Font Awesome 6 Free', FontAwesome;
-  font-style: normal;
-  content: '\f518' !important;
-  background-image: none;
-}
-div.callout-reading.callout {
-  border-left-color: purple;
-}
-div.callout-reading.callout-style-default > .callout-header {
-  background-color: rgb(from purple r g b / 13%);
-}
-div.callout-reading .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-reading.callout-style-default .callout-icon::before, div.callout-reading.callout-titled .callout-icon::before {
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
   content: '\f518' !important;
@@ -233,6 +233,7 @@ div.callout-reading.callout-style-default .callout-icon::before, div.callout-rea
   <ul class="collapse">
   <li><a href="#answerlist-1" id="toc-answerlist-1" class="nav-link" data-scroll-target="#answerlist-1">Answerlist</a></li>
   </ul></li>
+  <li><a href="#meta-information" id="toc-meta-information" class="nav-link" data-scroll-target="#meta-information">Meta-information</a></li>
   </ul>
 </nav>
     </div>
@@ -244,16 +245,15 @@ div.callout-reading.callout-style-default .callout-icon::before, div.callout-rea
 
 <section id="question" class="level1">
 <h1>Question</h1>
-<p>Which command correctly uses pipes to compute the mean of the variable <code>age</code> in <code>bfi</code>?</p>
+<p>Which of the following commands will compute the mean of the <code>age</code> variable from the <code>bfi</code> dataset?</p>
 <section id="answerlist" class="level2">
 <h2 class="anchored" data-anchor-id="answerlist">Answerlist</h2>
 <ul>
 <li><code>bfi$age %&gt;% mean()</code></li>
-<li><code>bfi %$% mean(age)</code></li>
 <li><code>bfi$age |&gt; mean()</code></li>
+<li><code>bfi %$% mean(age)</code></li>
 <li><code>bfi %&gt;% .$age %&gt;% mean()</code></li>
 <li><code>bfi %&gt;% mean(age)</code></li>
-<li><code>mean(bfi$age) %&gt;% ()</code></li>
 <li><code>bfi |&gt; mean(age)</code></li>
 <li><code>bfi %&gt;% mean()$age</code></li>
 <li><code>bfi %&gt;% mean(age, .)</code></li>
@@ -266,20 +266,23 @@ div.callout-reading.callout-style-default .callout-icon::before, div.callout-rea
 <section id="answerlist-1" class="level2">
 <h2 class="anchored" data-anchor-id="answerlist-1">Answerlist</h2>
 <ul>
-<li>TRUE: This command correctly uses the pipe operator <code>%&gt;%</code> to pass <code>bfi$age</code> to the <code>mean()</code> function.</li>
-<li>TRUE: This command correctly uses the magrittr pipe operator <code>%$%</code> to expose the columns of <code>bfi</code> and then computes the mean of <code>age</code>.</li>
-<li>TRUE: This command correctly uses the base R pipe operator <code>|&gt;</code> to pass <code>bfi$age</code> to the <code>mean()</code> function.</li>
-<li>TRUE: This command correctly uses the pipe operator <code>%&gt;%</code> to extract <code>age</code> from <code>bfi</code> and then computes the mean.</li>
-<li>FALSE: This command incorrectly attempts to compute the mean of <code>age</code> directly on the <code>bfi</code> data frame without extracting the <code>age</code> variable first.</li>
-<li>FALSE: This command incorrectly attempts to pipe the result of <code>mean(bfi$age)</code> into an empty function call <code>()</code>.</li>
-<li>FALSE: This command incorrectly attempts to compute the mean of <code>age</code> directly on the <code>bfi</code> data frame using the base R pipe operator <code>|&gt;</code>.</li>
-<li>FALSE: This command incorrectly attempts to access <code>age</code> from the result of <code>mean()</code> called on <code>bfi</code>.</li>
-<li>FALSE: This command incorrectly attempts to compute the mean of <code>age</code> by passing <code>age</code> as an argument to <code>mean()</code> without extracting it from <code>bfi</code>.</li>
-<li>FALSE: This command incorrectly attempts to pipe the result of <code>mean()</code> into <code>bfi$age</code>. Meta-information ================ exname: mean extype: mchoice exsolution: 1111000000 exshuffle: 5</li>
+<li>Correct: This command uses the <strong>dplyr</strong> pipe operator, <code>%&gt;%</code>, to pass <code>bfi$age</code> to the <code>mean()</code> function.</li>
+<li>Correct: This command uses the Base R pipe operator, <code>|&gt;</code>, to pass <code>bfi$age</code> to the <code>mean()</code> function.</li>
+<li>Correct: This command uses the exposition pipe operator, <code>%$%</code>, to expose the columns of <code>bfi</code> to the <code>mean()</code> function.</li>
+<li>Correct: This command uses the <strong>dplyr</strong> pipe operator, <code>%&gt;%</code>, and the dataset placeholder symbol, <code>.</code>, to extract <code>age</code> from <code>bfi</code>, and pass the result to <code>mean()</code>.</li>
+<li>Incorrect</li>
+<li>Incorrect</li>
+<li>Incorrect</li>
+<li>Incorrect</li>
+<li>Incorrect</li>
 </ul>
-
-
 </section>
+</section>
+<section id="meta-information" class="level1">
+<h1>Meta-information</h1>
+<p>exname: mean extype: mchoice exsolution: 111100000 exshuffle: 5</p>
+
+
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -375,7 +378,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/www\.openstatprog\.com\/module-template\/");
+      var filterRegex = new RegExp("https:\/\/www\.openstatprog\.com\/baby-pipes\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

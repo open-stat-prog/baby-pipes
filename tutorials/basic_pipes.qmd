@@ -1,24 +1,27 @@
 ---
 title: "Usage"
+webr:
+  packages: 'dplyr'
 ---
 
-```{r, echo = FALSE}
-library(dplyr)
-library(psych)
+```{webr-r}
+#| autorun: true
+#| context: setup
 
-names(bfi.keys) <- c("agree", "consc", "extra", "neuro", "open")
+dir.create("data")
+download.file("https://openstatprog.com/raw-data/bfi.rds", "data/bfi.rds")
 
-tmp <- scoreItems(keys = bfi.keys, items = bfi, impute = "none")
+bfi <- readRDS("data/bfi.rds")
+```
 
-bfi <- data.frame(bfi, as.data.frame(tmp$scores)) |>
-  mutate(gender = factor(gender, labels = c("male", "female"))) |>
-  rename_with(.fn = tolower, .cols = matches("\\d$"))
+```{r, include = FALSE}
+bfi <- readRDS(here::here("data", "bfi.rds"))
 ```
 
 ## How Pipes Work
 
 The pipe operator simply passes the output from the upstream function into the first argument of the downstream
-function. Hence, these two expressios are equivalent:
+function. Hence, these two expressions are equivalent:
 
 ```{r}
 mean(bfi$age)
@@ -70,9 +73,9 @@ bfi$a1 |> var(na.rm = TRUE)
 
 Create a pipeline to complete the following operations in one expression.
 
-1. Create a random sample of $N = 1000$ normally distributed values with:
-   - Mean $\mu = 10$
-   - SD $\sigma = 5$
+1. Create a random sample of 1000 normally distributed values with:
+   - Mean of 10
+   - SD of 5
 1. Compute the range of your sample.
     - I.e., the difference between the largest and smallest value.
 1. Check if the range of your sample is at least 1.5 times the population variance.
@@ -133,18 +136,6 @@ bfi |> lm(extra ~ age + open, _)
 
 This trick makes it possible to use nearly any function in a pipeline, even when the dataset isn't the first argument.
 
-```{webr-r}
-#| autorun: true
-#| context: setup
-
-names(bfi.keys) <- c("agree", "consc", "extra", "neuro", "open")
-
-tmp <- scoreItems(keys = bfi.keys, items = bfi, impute = "none")
-
-bfi <- data.frame(bfi, as.data.frame(tmp$scores)) |>
-  mutate(gender = factor(gender, labels = c("male", "female"))) |>
-  rename_with(.fn = tolower, .cols = matches("\\d$"))
-```
 
 ::: practice
 

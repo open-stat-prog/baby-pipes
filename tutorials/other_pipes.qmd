@@ -1,18 +1,21 @@
 ---
 title: "Different Pipe Operators"
+webr:
+  packages: ['dplyr', 'magrittr']
 ---
 
-```{r, echo = FALSE}
-library(dplyr)
-library(psych)
+```{webr-r}
+#| autorun: true
+#| context: setup
 
-data(bfi)
-names(bfi.keys) <- c("agree", "consc", "extra", "neuro", "open")
-tmp <- scoreItems(keys = bfi.keys, items = bfi, impute = "none")
+dir.create("data")
+download.file("https://openstatprog.com/raw-data/bfi.rds", "data/bfi.rds")
 
-bfi <- data.frame(bfi, tmp$scores) |>
-  mutate(gender = factor(gender, labels = c("male", "female"))) |>
-  rename_with(.fn = tolower, .cols = matches("\\d$"))
+bfi <- readRDS("data/bfi.rds")
+```
+
+```{r, include = FALSE}
+bfi <- readRDS(here::here("data", "bfi.rds"))
 ```
 
 ## The **dplyr** Pipe: `%>%`
@@ -74,31 +77,17 @@ The exposition pipe allows the `lm()` call to access the column names of `bfi` w
 age`. We can achieve analogous results in several ways.
 
 ```{r}
-## Explicitly regress vectors:
+# Explicitly regress vectors:
 lm(bfi$extra ~ bfi$age + bfi$open)
 
-## Use the Base R equivalent of %$%:
+# Use the Base R equivalent of %$%:
 with(bfi, lm(extra ~ age + open))
 
-## Use a dataset placeholder symbol:
+# Use a dataset placeholder symbol:
 bfi |> lm(extra ~ age + open, data = _)
 ```
 
 ::: practice
-
-```{webr-r}
-#| autorun: true
-#| context: setup
-
-data(bfi)
-
-names(bfi.keys) <- c("agree", "consc", "extra", "neuro", "open")
-tmp <- scoreItems(keys = bfi.keys, items = bfi, impute = "none")
-
-bfi <- data.frame(bfi, tmp$scores) |>
-  mutate(gender = factor(gender, labels = c("male", "female"))) |>
-  rename_with(.fn = tolower, .cols = matches("\\d$"))
-```
 
 Use the `bfi` dataset and an exposition pipe to create a pipeline to draw a conditional boxplot that visualizes the
 distribution of `agree` scores within `gender` groups.
@@ -205,7 +194,7 @@ bfi1 <- bfi
 head(bfi1)
 
 bfi1 %<>%
-  slice_sample(n = 20) %>%
+  slice_sample(n = 20) |>
   select(-matches("\\d$"))
 
 head(bfi1)
@@ -236,6 +225,15 @@ library(magrittr)
 
 mtcars %<>% scale()
 ```
+
+We can sanity check the results by computing the means and variances of each variable.
+
+```{r}
+colMeans(mtcars)
+apply(mtcars, 2, var)
+```
+
+Looks good!
 
 ::::
 

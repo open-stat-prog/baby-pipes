@@ -117,19 +117,6 @@ div.callout-reading.callout-style-default .callout-icon::before, div.callout-rea
   content: '\f518' !important;
   background-image: none;
 }
-div.callout-resource.callout {
-  border-left-color: orange;
-}
-div.callout-resource.callout-style-default > .callout-header {
-  background-color: rgb(from orange r g b / 13%);
-}
-div.callout-resource .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
-div.callout-resource.callout-style-default .callout-icon::before, div.callout-resource.callout-titled .callout-icon::before {
-  font-family: 'Font Awesome 6 Free', FontAwesome;
-  font-style: normal;
-  content: '\f0c1' !important;
-  background-image: none;
-}
 div.callout-reading-advanced.callout {
   border-left-color: red;
 }
@@ -141,6 +128,19 @@ div.callout-reading-advanced.callout-style-default .callout-icon::before, div.ca
   font-family: 'Font Awesome 6 Free', FontAwesome;
   font-style: normal;
   content: '\f518' !important;
+  background-image: none;
+}
+div.callout-resource.callout {
+  border-left-color: orange;
+}
+div.callout-resource.callout-style-default > .callout-header {
+  background-color: rgb(from orange r g b / 13%);
+}
+div.callout-resource .callout-toggle::before {  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="rgb(33, 37, 41)" class="bi bi-chevron-down" viewbox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"></path></svg>');}
+div.callout-resource.callout-style-default .callout-icon::before, div.callout-resource.callout-titled .callout-icon::before {
+  font-family: 'Font Awesome 6 Free', FontAwesome;
+  font-style: normal;
+  content: '\f0c1' !important;
   background-image: none;
 }
 div.callout-practice.callout {
@@ -304,7 +304,7 @@ div.callout-practice.callout-style-default .callout-icon::before, div.callout-pr
 0.8984019 0.9513469 1.0609041 1.1963314 0.8083739 </code></pre>
 </div>
 </div>
-<p>This approach does the job, but it’s certainly not ideal (unless you happen to be a big fan of elisp). The main issue is readability: the code is difficult to parse because you need to read the nested function calls from the inside out to understand the sequence of operations. The situation gets even worse if we’re not as careful about formatting our code.</p>
+<p>This approach does the job, but it’s certainly not ideal (unless you happen to be a big fan of <a href="https://xkcd.com/297">lisp</a>). The main issue is readability: the code is difficult to parse because you need to read the nested function calls from the inside out to understand the sequence of operations. The situation gets even worse if we’re not as careful about formatting our code.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">cov</span>(bfi[<span class="fu">c</span>(<span class="st">"agree"</span>, <span class="st">"consc"</span>, <span class="st">"extra"</span>, <span class="st">"neuro"</span>, <span class="st">"open"</span>)],</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">use =</span> <span class="st">"pairwise"</span>)))</span>
@@ -368,11 +368,13 @@ div.callout-practice.callout-style-default .callout-icon::before, div.callout-pr
 </div>
 <p>This type of error can be difficult to catch in real-world projects, and R won’t do anything to warn you. So, we want to minimize our opportunities for such mistakes, and pipes are a great way to do just that. Using a pipe, we can express the same sequence of calculations in a single expression with a clear, logical structure.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> bfi <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(agree, consc, extra, neuro, open) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>(<span class="at">use =</span> <span class="st">"pairwise"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>() <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> bfi <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(agree, consc, extra, neuro, open) <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cov</span>(<span class="at">use =</span> <span class="st">"pairwise"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When we compose multiple function call using pipes, we call the resulting command a <em>pipeline</em>. Such pipelines solve both the issues noted above.</p>
 <ol type="1">
@@ -399,27 +401,27 @@ div.callout-practice.callout-style-default .callout-icon::before, div.callout-pr
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tmp1, <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   extra neuro age gender education
-1    1.0   1.0   5   male         3
-2    1.0   1.0   1   male         3
-3    1.6   3.2   0 female         3
-4    1.8   4.0  18 female         2
-5    2.0   6.0  32 female         3
-6    2.2   4.4   5 female         3
-7    2.2   4.6  22   male        NA
-8    2.2   4.0  17 female         3
-9    2.2   2.6  22 female         3
-10   2.2   4.2   9 female         5
-11   2.2   3.8  36 female         4
-12   2.2   2.8  11 female         3
-13   2.2   6.0   9 female         3
-14   2.2   1.2   3 female         3
-15   2.2   4.2  20 female         3
-16   2.2   1.4  32 female         4
-17   2.4   2.0  50   male         5
-18   2.4   3.6   3   male         4
-19   2.4   2.8  36 female         3
-20   2.4   1.0   0 female         1</code></pre>
+<pre><code>   extra neuro age gender            education
+1    1.0   1.0   5   male         some_college
+2    1.0   1.0   1   male         some_college
+3    1.6   3.2   0 female         some_college
+4    1.8   4.0  18 female high_school_graduate
+5    2.0   6.0  32 female         some_college
+6    2.2   4.4   5 female         some_college
+7    2.2   4.6  22   male                 &lt;NA&gt;
+8    2.2   4.0  17 female         some_college
+9    2.2   2.6  22 female         some_college
+10   2.2   4.2   9 female      graduate_degree
+11   2.2   3.8  36 female     college_graduate
+12   2.2   2.8  11 female         some_college
+13   2.2   6.0   9 female         some_college
+14   2.2   1.2   3 female         some_college
+15   2.2   4.2  20 female         some_college
+16   2.2   1.4  32 female     college_graduate
+17   2.4   2.0  50   male      graduate_degree
+18   2.4   3.6   3   male     college_graduate
+19   2.4   2.8  36 female         some_college
+20   2.4   1.0   0 female     some_high_school</code></pre>
 </div>
 </div>
 <p>When we implement these computations as a pipeline, each step is explicit, readable, and self-contained: it’s as clear as possible what happens and in what order. The same data processing written without pipes would be much harder to follow:</p>
@@ -433,27 +435,27 @@ div.callout-practice.callout-style-default .callout-icon::before, div.callout-pr
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tmp2, <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      extra neuro age gender education
-64642   1.0   1.0   5   male         3
-65974   1.0   1.0   1   male         3
-66676   1.6   3.2   0 female         3
-62336   1.8   4.0  18 female         2
-65392   2.0   6.0  32 female         3
-63026   2.2   4.4   5 female         3
-63324   2.2   4.6  22   male        NA
-63668   2.2   4.0  17 female         3
-64050   2.2   2.6  22 female         3
-64158   2.2   4.2   9 female         5
-64621   2.2   3.8  36 female         4
-64724   2.2   2.8  11 female         3
-64753   2.2   6.0   9 female         3
-66440   2.2   1.2   3 female         3
-67357   2.2   4.2  20 female         3
-67560   2.2   1.4  32 female         4
-61661   2.4   2.0  50   male         5
-61761   2.4   3.6   3   male         4
-61782   2.4   2.8  36 female         3
-63027   2.4   1.0   0 female         1</code></pre>
+<pre><code>      extra neuro age gender            education
+64642   1.0   1.0   5   male         some_college
+65974   1.0   1.0   1   male         some_college
+66676   1.6   3.2   0 female         some_college
+62336   1.8   4.0  18 female high_school_graduate
+65392   2.0   6.0  32 female         some_college
+63026   2.2   4.4   5 female         some_college
+63324   2.2   4.6  22   male                 &lt;NA&gt;
+63668   2.2   4.0  17 female         some_college
+64050   2.2   2.6  22 female         some_college
+64158   2.2   4.2   9 female      graduate_degree
+64621   2.2   3.8  36 female     college_graduate
+64724   2.2   2.8  11 female         some_college
+64753   2.2   6.0   9 female         some_college
+66440   2.2   1.2   3 female         some_college
+67357   2.2   4.2  20 female         some_college
+67560   2.2   1.4  32 female     college_graduate
+61661   2.4   2.0  50   male      graduate_degree
+61761   2.4   3.6   3   male     college_graduate
+61782   2.4   2.8  36 female         some_college
+63027   2.4   1.0   0 female     some_high_school</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all.equal</span>(tmp1, tmp2, <span class="at">check.attributes =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -557,7 +559,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/www\.openstatprog\.com\/module-template\/");
+      var filterRegex = new RegExp("https:\/\/www\.openstatprog\.com\/baby-pipes\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

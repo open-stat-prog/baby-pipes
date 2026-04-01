@@ -25,7 +25,7 @@ After completing this module, you will be able to:
    1. The exposition pipe: `%$%`
    1. The assignment pipe: `%<>%`
 
-Click the button below to get started with the first tutorial.
+Click the button below to get started with the tutorial.
 
 ```{r}
 #| echo: false
